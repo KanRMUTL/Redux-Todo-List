@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8080/todos").then(response => {
+    axios.get("https://condom-server.herokuapp.com/todos").then(response => {
       this.setState({ todos: response.data });
     });
   }
@@ -29,7 +29,7 @@ class App extends Component {
     oldState[index].complete = complete;
 
     axios
-      .patch(`http://localhost:8080/todos/${oldState[index].id}`, {
+      .patch(`https://condom-server.herokuapp.com/todos/${oldState[index].id}`, {
         complete: complete
       })
       .then(response => {
@@ -51,7 +51,7 @@ class App extends Component {
       name: this.state.message,
       complete: false
     };
-    axios.post(`http://localhost:8080/todos`, message);
+    axios.post(`https://condom-server.herokuapp.com/todos`, message);
     oldState.push(message);
     this.setState({ todos: oldState, message: "" });
   }
