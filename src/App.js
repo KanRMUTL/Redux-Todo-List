@@ -4,7 +4,7 @@ import FormSumit from "./components/FormSubmit";
 import List from "./components/List";
 import axios from "axios";
 import { connect } from "react-redux";
-import {addTodo} from "./store/actions/todo"
+import {addTodo, getTodo} from "./store/actions/todo"
 class App extends Component {
   constructor() {
     super();
@@ -12,16 +12,14 @@ class App extends Component {
       message: "",
       todos: []
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSumitForm = this.handleSumitForm.bind(this);
+
     this.handleCheckboxCheck = this.handleCheckboxCheck.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    // this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
-    axios.get("https://condom-server.herokuapp.com/todos").then(response => {
-      this.setState({ todos: response.data });
-    });
+    this.props.getTodo();
+    
   }
 
   handleCheckboxCheck(index, complete) {
@@ -40,25 +38,6 @@ class App extends Component {
       });
   }
 
-  handleInputChange(e) {
-    this.setState({ message: e.target.value });
-  }
-
-  handleSumitForm(e) {
-    e.preventDefault();
-    let oldState = this.state.todos;
-    let todoLength = this.state.todos.length;
-    let lastId = this.state.todos[todoLength - 1].id;
-    let message = {
-      id: lastId + 1,
-      name: this.state.message,
-      complete: false
-    };
-    axios.post(`https://condom-server.herokuapp.com/todos`, message);
-    oldState.push(message);
-    this.setState({ todos: oldState, message: "" });
-  }
-
   render() {
     return (
       <div
@@ -73,15 +52,8 @@ class App extends Component {
         }}
       >
         <HeadeComponent />
-        <List
-          handleCheckboxCheck={this.handleCheckboxCheck}
-          todos={this.state.todos}
-        />
-        <FormSumit
-          message={this.state.message}
-          handleInputChange={this.handleInputChange}
-          handleSumitForm={this.handleSumitForm}
-        />
+        <List handleCheckboxCheck={this.handleCheckboxCheck}/>
+        <FormSumit/>
       </div>
     );
   }
@@ -92,7 +64,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispathToProps = dispatch => ({
-  addTodo: message => dispatch(addTodo(message))
+  addTodo: message => dispatch(addTodo(message)),
+  getTodo: () => dispatch(getTodo())
 });
 
 export default connect(

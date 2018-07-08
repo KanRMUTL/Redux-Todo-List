@@ -11,7 +11,6 @@ const List = props => (
     }}
   >
     <ListItems
-      todos={props.todos}
       handleCheckboxCheck={props.handleCheckboxCheck}
     />
   </div>

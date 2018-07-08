@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 const ListItems = props => (
   <React.Fragment>
     {props.todos.map((todo, index) => (
@@ -27,4 +28,11 @@ const ListItems = props => (
   </React.Fragment>
 );
 
-export default ListItems;
+const mapStateToProps = state => ({
+  todos: state.todo.todos
+});
+
+// const mapDispathToProps = dispatch => ({
+// });
+
+export default connect(mapStateToProps) (ListItems);
