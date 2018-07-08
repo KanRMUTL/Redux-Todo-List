@@ -28,6 +28,7 @@ class FormSubmit extends Component {
         <form onSubmit={this.handleSumitForm} style={{ display: "flex" }}>
           <input
           required
+          autoFocus
             type="text"
             value={this.state.message}
             onChange={this.handleInputChange}
