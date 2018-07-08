@@ -3,7 +3,8 @@ import HeadeComponent from "./components/HeaderComponent";
 import FormSumit from "./components/FormSubmit";
 import List from "./components/List";
 import axios from "axios";
-
+import { connect } from "react-redux";
+import {addTodo} from "./store/actions/todo"
 class App extends Component {
   constructor() {
     super();
@@ -11,7 +12,6 @@ class App extends Component {
       message: "",
       todos: []
     };
-
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSumitForm = this.handleSumitForm.bind(this);
     this.handleCheckboxCheck = this.handleCheckboxCheck.bind(this);
@@ -29,9 +29,12 @@ class App extends Component {
     oldState[index].complete = complete;
 
     axios
-      .patch(`https://condom-server.herokuapp.com/todos/${oldState[index].id}`, {
-        complete: complete
-      })
+      .patch(
+        `https://condom-server.herokuapp.com/todos/${oldState[index].id}`,
+        {
+          complete: complete
+        }
+      )
       .then(response => {
         this.setState({ todos: oldState });
       });
@@ -84,4 +87,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  todos: state.todo.todos
+});
+
+const mapDispathToProps = dispatch => ({
+  addTodo: message => dispatch(addTodo(message))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(App);
