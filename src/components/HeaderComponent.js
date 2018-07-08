@@ -17,7 +17,7 @@ const HeadeComponent = props => (
         fontSize: 25
       }}
     >
-      TODO LIST ::
+      Chat system By::[--condom server--]
     </h1>
   </header>
 );

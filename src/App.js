@@ -18,8 +18,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.getTodo();
-    
+   setInterval(()=>{
+    this.props.getTodo()},
+    500
+   )
   }
 
   handleCheckboxCheck(index, complete) {
