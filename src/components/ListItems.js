@@ -33,9 +33,11 @@ class ListItems extends Component {
               backgroundColor: "#fefefe",
               borderColor: "#ccc",
               borderWidth: 1,
+              display: "block",
               borderStyle: "solid",
               borderRadius: 5,
               margin: 2,
+              width: "max-content",
               padding: 5,
               paddingTop: 10,
               paddingBottom: 19

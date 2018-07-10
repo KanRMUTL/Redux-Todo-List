@@ -35,7 +35,7 @@ class FormSubmit extends Component {
             style={{ flex: 9, height: 30 }}
           />
           <button type="submit" style={{ height: 35, flex: 1 }}>
-            <strong>Add to List</strong>
+            <strong>Send</strong>
           </button>
         </form>
       </div>
